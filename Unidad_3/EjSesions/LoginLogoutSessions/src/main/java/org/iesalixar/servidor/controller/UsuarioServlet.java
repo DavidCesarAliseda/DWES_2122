@@ -38,6 +38,8 @@ public class UsuarioServlet extends HttpServlet {
 			
 			if (usuario!=null && usuario.getNombre().equals("normal")) {
 				
+				request.setAttribute("usuariobean", usuario);
+				
 				request.getRequestDispatcher("usuario.jsp").forward(request, response);
 				
 			}

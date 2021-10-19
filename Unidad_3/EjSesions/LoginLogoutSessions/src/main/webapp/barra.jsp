@@ -1,12 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-
-</body>
-</html>
+<%@ page import= "org.iesalixar.servidor.model.Usuario"%>
+<div class="d-flex justify-content-end">
+	<h4>
+	<%
+		Usuario user = (Usuario) session.getAttribute("usuario");
+		out.println(user.getNombre());
+	%>
+	</h4>
+	<a href="Logout">Logout</a>
+</div>

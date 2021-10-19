@@ -39,6 +39,7 @@ public class AdminServlet extends HttpServlet {
 			Usuario usuario = (Usuario) sesion.getAttribute("usuario");
 			
 			if (usuario!=null && usuario.getNombre().equals("admin") ) {
+				request.setAttribute("usuariobean", usuario);
 				request.getRequestDispatcher("admin.jsp").forward(request, response);
 			}
 		}
