@@ -3,6 +3,7 @@ package org.iesalixar.servidor.controller;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -47,6 +48,8 @@ public class Login extends HttpServlet {
 			Usuario user = new Usuario();
 			user.setNombre(usuario);
 			sesion.setAttribute("usuario",user );
+			Cookie cookie = new Cookie("admincookie","Estoesunacookie");
+			response.addCookie(cookie);
 			
 			response.sendRedirect("AdminServlet");
 			

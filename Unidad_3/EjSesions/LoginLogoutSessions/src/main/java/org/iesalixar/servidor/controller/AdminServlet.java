@@ -3,6 +3,7 @@ package org.iesalixar.servidor.controller;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -41,6 +42,8 @@ public class AdminServlet extends HttpServlet {
 			if (usuario!=null && usuario.getNombre().equals("admin") ) {
 				request.setAttribute("usuariobean", usuario);
 				request.getRequestDispatcher("admin.jsp").forward(request, response);
+				
+				
 			}
 		}
 		
