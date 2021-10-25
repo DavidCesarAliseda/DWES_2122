@@ -42,10 +42,12 @@ public class Seleccionar extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession sesion = request.getSession();
-		if (!sesion.isNew()) {
+
+		if (!sesion.isNew() && (boolean) sesion.getAttribute("Login")) {
 			request.getRequestDispatcher("seleccionar.jsp").forward(request, response);
 			return;
 		}
+
 		sesion.invalidate();
 		response.sendRedirect("Login");
 
@@ -62,19 +64,19 @@ public class Seleccionar extends HttpServlet {
 		if (NAME_PATTERN.matcher(request.getParameter("nombre")).matches()
 				&& NAME_PATTERN.matcher(request.getParameter("apellido")).matches()
 				&& EMAIL_PATTERN.matcher(request.getParameter("email")).matches()) {
-			
+
 			sesion.setAttribute("nombre", request.getParameter("nombre"));
 			sesion.setAttribute("apellido", request.getParameter("apellido"));
 			sesion.setAttribute("email", request.getParameter("email"));
-			
+
 			sesion.setAttribute("modulos", request.getParameterValues("select"));
-			
-			Cookie cookie = new Cookie("curso",request.getParameter("curso"));
+
+			Cookie cookie = new Cookie("curso", request.getParameter("curso"));
 			response.addCookie(cookie);
-			
+
 			response.sendRedirect("ConfirmarMatricula");
-			
-		}else {
+
+		} else {
 			response.sendRedirect("Seleccionar");
 		}
 	}

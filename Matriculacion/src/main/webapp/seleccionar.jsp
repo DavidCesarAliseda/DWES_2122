@@ -7,8 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form method="post"
-		action="<%=request.getContextPath()%>/Formularios">
+	<form method="post">
 
 		<p>
 			<label for="nombre">Introduce un nombre: </label> <input id="nombre"
