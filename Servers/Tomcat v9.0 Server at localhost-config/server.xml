@@ -153,7 +153,7 @@
              Note: The pattern used is equivalent to using pattern="common" -->
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log" suffix=".txt"/>
 
-      <Context docBase="EjemploJSPForward" path="/EjemploJSPForward" reloadable="true" source="org.eclipse.jst.jee.server:EjemploJSPForward"/><Context docBase="EjemploJSPForwardLogin" path="/EjemploJSPForwardLogin" reloadable="true" source="org.eclipse.jst.jee.server:EjemploJSPForwardLogin"/><Context docBase="GeneracionListaJSP" path="/GeneracionListaJSP" reloadable="true" source="org.eclipse.jst.jee.server:GeneracionListaJSP"/><Context docBase="HolaMundoJSP" path="/HolaMundoJSP" reloadable="true" source="org.eclipse.jst.jee.server:HolaMundoJSP"/><Context docBase="LoginJSPOnePage" path="/LoginJSPOnePage" reloadable="true" source="org.eclipse.jst.jee.server:LoginJSPOnePage"/><Context docBase="LoginUsingBeans" path="/LoginUsingBeans" reloadable="true" source="org.eclipse.jst.jee.server:LoginUsingBeans"/><Context docBase="Properties" path="/Properties" reloadable="true" source="org.eclipse.jst.jee.server:Properties"/></Host>
+      <Context docBase="EjercicioTema3A" path="/EjercicioTema3A" reloadable="true" source="org.eclipse.jst.jee.server:EjercicioTema3A"/></Host>
     </Engine>
   </Service>
 </Server>
