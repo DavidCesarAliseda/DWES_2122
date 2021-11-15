@@ -31,6 +31,12 @@ USE `classicmodels`;
 
 DROP TABLE IF EXISTS `customers`;
 
+create table `usuarios` (
+`usuario` varchar(250) primary key, 
+`email` varchar(250) unique,
+`password` varchar(250) NOT NULL,
+`role` varchar(10) NOT NULL);
+
 CREATE TABLE `customers` (
   `customerNumber` int(11) NOT NULL,
   `customerName` varchar(50) NOT NULL,

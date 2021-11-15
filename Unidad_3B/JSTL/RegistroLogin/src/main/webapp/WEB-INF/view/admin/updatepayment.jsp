@@ -34,7 +34,7 @@
     				<input type="date" class="form-control" id="paymentDate" name="paymentDate" value="${pago.date}" required>
     				<label for="amount" class="form-label mt-3">Cantidad</label>
     				<input type="number" class="form-control" id="amount" name="amount" value="${pago.amount}" required>
-    				<input type="submit" class="btn btn-primary w-100 mt-3" value="AÑADIR" />					
+    				<input type="submit" class="btn btn-primary w-100 mt-3" value="ACTUALIZAR" />					
 				</form>
 			</div>
 		</div>

@@ -7,6 +7,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.iesalixar.servidor.dao.DAOUsuarioImpl;
+import org.iesalixar.servidor.model.Usuario;
+import org.iesalixar.servidor.utils.PasswordHashGenerator;
+
 /**
  * Servlet implementation class RegisterServlet
  */
@@ -42,7 +46,15 @@ public class RegisterServlet extends HttpServlet {
 		//Comprobamos que los parámetros no son nulos
 		if ( usuario!=null && email!=null && password!=null) {
 			
+			Usuario user = new Usuario(usuario, email, PasswordHashGenerator.hashPassword(password), "usuario");
+			
+			DAOUsuarioImpl dao = new DAOUsuarioImpl();
+			
+			dao.registerUsuario(user);
+			
 		}
+		
+		response.sendRedirect(request.getContextPath());
 	}
 
 }

@@ -131,4 +131,10 @@ public class DAOPaymentImpl implements DAOPayment {
 	
 	}
 
+	@Override
+	public boolean insertPayment(Payment payment) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

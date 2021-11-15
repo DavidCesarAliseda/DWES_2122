@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.iesalixar.servidor.dao.DAOCustomerImpl;
+import org.iesalixar.servidor.dao.DAOPaymentImpl;
 import org.iesalixar.servidor.model.Customer;
+import org.iesalixar.servidor.model.Payment;
 
 /**
  * Servlet implementation class AddPaymentServlet
@@ -45,8 +47,15 @@ public class AddPaymentServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		String checkNumber = request.getParameter("checkn");
+		int customerNumber = Integer.parseInt(request.getParameter("cn"));
+		String date = request.getParameter("date");
+		Double amount = Double.parseDouble(request.getParameter("amount"));
+		
+		if (checkNumber != null && customerNumber != 0 && date != null && amount != 0.0) {
+
+			DAOPaymentImpl dao = new DAOPaymentImpl();
+		}
 	}
 
 }
