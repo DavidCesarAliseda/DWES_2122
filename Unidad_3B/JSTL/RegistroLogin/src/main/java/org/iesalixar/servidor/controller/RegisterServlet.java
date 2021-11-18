@@ -7,7 +7,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+<<<<<<< HEAD
 import org.iesalixar.servidor.dao.DAOUsuario;
+=======
+>>>>>>> d8d766ce2c47d28587f40b92d8f50ab4c43b721b
 import org.iesalixar.servidor.dao.DAOUsuarioImpl;
 import org.iesalixar.servidor.model.Usuario;
 import org.iesalixar.servidor.utils.PasswordHashGenerator;
@@ -48,6 +51,7 @@ public class RegisterServlet extends HttpServlet {
 		//Comprobamos que los parámetros no son nulos
 		if ( usuario!=null && email!=null && password!=null) {
 			
+<<<<<<< HEAD
 			if(userDao.getUsuario(usuario)!=null) {
 				
 				request.setAttribute("error", "Usuario existente");
@@ -62,7 +66,17 @@ public class RegisterServlet extends HttpServlet {
 				
 				userDao.registerUsuario(user);
 			}
+=======
+			Usuario user = new Usuario(usuario, email, PasswordHashGenerator.hashPassword(password), "usuario");
+			
+			DAOUsuarioImpl dao = new DAOUsuarioImpl();
+			
+			dao.registerUsuario(user);
+			
+>>>>>>> d8d766ce2c47d28587f40b92d8f50ab4c43b721b
 		}
+		
+		response.sendRedirect(request.getContextPath());
 	}
 
 }
