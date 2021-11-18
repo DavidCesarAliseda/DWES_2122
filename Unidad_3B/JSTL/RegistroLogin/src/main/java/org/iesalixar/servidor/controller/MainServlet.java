@@ -6,6 +6,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.iesalixar.servidor.dao.DAOUsuario;
+import org.iesalixar.servidor.dao.DAOUsuarioImpl;
+import org.iesalixar.servidor.model.Usuario;
+import org.iesalixar.servidor.utils.PasswordHashGenerator;
 
 /**
  * Servlet implementation class MainServlet
@@ -42,6 +48,38 @@ public class MainServlet extends HttpServlet {
 		if (usuario!=null && password!=null) {
 			
 			//Check credentials
+			DAOUsuario userDao = new DAOUsuarioImpl();
+			
+			Usuario user = userDao.getUsuario(usuario);
+			
+			if(user!=null) {
+				if(PasswordHashGenerator.checkPassword(password, user.getPassword())) {
+					
+					HttpSession sesion = request.getSession();
+					
+					/*Se guardan en sesion atributos del usuario*/
+					sesion.setAttribute("usuario", user.getUsuario());
+					sesion.setAttribute("email", user.getEmail());
+					sesion.setAttribute("role", user.getRole());
+					
+					/*Se redirecciona al usuario a la zona correcta dependiendo del rol*/					
+					if ("admin".equals(user.getRole())) {
+						response.sendRedirect("Admin/");
+					} else {
+						response.sendRedirect("Search");
+					}
+				}else {
+					
+					request.setAttribute("error", "login inválido");
+					doGet(request,response);
+					return;
+					
+				}
+			}
+		}else {
+			request.setAttribute("error", "Usuario no existente");
+			doGet(request,response);
+			return;
 		}
 	}
 
