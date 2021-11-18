@@ -17,7 +17,7 @@
 					<label for="customerNumber mt-3" class="form-label">CustomerNumber</label>
 					<select class="form-select" id="customerNumber" name="customerNumber">
 						<c:forEach  items="${customers}" var="c">
-							<option value="${c.customerNumber}">${c.customerName}</option>
+							<option value="${c.customerNumber}">${c.customerName}-${c.customerNumber}</option>
 						</c:forEach>					
 					</select>
 					<label for="checkNumber" class="form-label mt-3">CheckNumber</label>

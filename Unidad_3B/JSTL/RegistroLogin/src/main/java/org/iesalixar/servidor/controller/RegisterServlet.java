@@ -1,16 +1,12 @@
 package org.iesalixar.servidor.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-<<<<<<< HEAD
-import org.iesalixar.servidor.dao.DAOUsuario;
-=======
->>>>>>> d8d766ce2c47d28587f40b92d8f50ab4c43b721b
 import org.iesalixar.servidor.dao.DAOUsuarioImpl;
 import org.iesalixar.servidor.model.Usuario;
 import org.iesalixar.servidor.utils.PasswordHashGenerator;
@@ -46,34 +42,25 @@ public class RegisterServlet extends HttpServlet {
 		String usuario = request.getParameter("usuario");
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
-		DAOUsuario userDao = new DAOUsuarioImpl();
+		DAOUsuarioImpl dao = new DAOUsuarioImpl();
 		
 		//Comprobamos que los parámetros no son nulos
 		if ( usuario!=null && email!=null && password!=null) {
 			
-<<<<<<< HEAD
-			if(userDao.getUsuario(usuario)!=null) {
+			if (dao.getUsuario(usuario)!=null) {
 				
 				request.setAttribute("error", "Usuario existente");
 				doGet(request,response);
 				return;
 				
-			}else {
+			} else {
 				
 				password = PasswordHashGenerator.hashPassword(password);
 				
 				Usuario user = new Usuario(usuario,password,email,"usuario");
 				
-				userDao.registerUsuario(user);
+				dao.registerUsuario(user);
 			}
-=======
-			Usuario user = new Usuario(usuario, email, PasswordHashGenerator.hashPassword(password), "usuario");
-			
-			DAOUsuarioImpl dao = new DAOUsuarioImpl();
-			
-			dao.registerUsuario(user);
-			
->>>>>>> d8d766ce2c47d28587f40b92d8f50ab4c43b721b
 		}
 		
 		response.sendRedirect(request.getContextPath());

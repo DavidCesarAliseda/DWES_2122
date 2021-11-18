@@ -19,13 +19,12 @@
 						<c:forEach  items="${customers}" var="c">
 							<c:choose>
 								<c:when test="${c.customerNumber == pago.customerNumber}">
-									<option value="${c.customerNumber}" selected>${c.customerName}</option>
+									<option value="${c.customerNumber}" selected>${c.customerName}-${c.customerNumber}</option>
 								</c:when>
 								<c:otherwise>
-									<option value="${c.customerNumber}">${c.customerName}</option>
+									<option value="${c.customerNumber}">${c.customerName}-${c.customerNumber}</option>
 								</c:otherwise>
-							</c:choose>
-							
+							</c:choose>							
 						</c:forEach>					
 					</select>
 					<label for="checkNumber" class="form-label mt-3">CheckNumber</label>
@@ -34,7 +33,7 @@
     				<input type="date" class="form-control" id="paymentDate" name="paymentDate" value="${pago.date}" required>
     				<label for="amount" class="form-label mt-3">Cantidad</label>
     				<input type="number" class="form-control" id="amount" name="amount" value="${pago.amount}" required>
-    				<input type="submit" class="btn btn-primary w-100 mt-3" value="ACTUALIZAR" />					
+    				<input type="submit" class="btn btn-primary w-100 mt-3" value="AÑADIR" />					
 				</form>
 			</div>
 		</div>

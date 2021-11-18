@@ -83,8 +83,8 @@ public class DAOPaymentImpl implements DAOPayment {
 	@Override
 	public boolean removePayment(int customerNumber, String checkNumber) {
 
-		int resultado=0;
-		
+		int resultado = 0;
+
 		try {
 
 			String sql = "delete from payments where customerNumber=? and checkNumber=?";
@@ -100,24 +100,23 @@ public class DAOPaymentImpl implements DAOPayment {
 			System.out.println(ex.getMessage());
 		}
 
-		return (resultado==0?false:true);
+		return (resultado == 0 ? false : true);
 
 	}
 
 	@Override
 	public boolean updatePayment(Payment payment) {
-		
-		int resultado=0;
-		
+
+		int resultado = 0;
+
 		try {
 
 			String sql = "update payments set paymentDate= ?, amount=? where customerNumber = ? and checkNumber = ?";
 			PreparedStatement statement = ConexionBD.getConnection().prepareStatement(sql);
-			statement.setString(1,payment.getDate());
+			statement.setString(1, payment.getDate());
 			statement.setDouble(2, payment.getAmount());
 			statement.setInt(3, payment.getCustomerNumber());
 			statement.setString(4, payment.getCheckNumber());
-			
 
 			resultado = statement.executeUpdate();
 
@@ -127,14 +126,33 @@ public class DAOPaymentImpl implements DAOPayment {
 			System.out.println(ex.getMessage());
 		}
 
-		return (resultado==0?false:true);
-	
+		return (resultado == 0 ? false : true);
+
 	}
 
 	@Override
 	public boolean insertPayment(Payment payment) {
-		// TODO Auto-generated method stub
-		return false;
+		int resultado = 0;
+
+		try {
+
+			String sql = "insert into payments values(?,?,?,?)";
+			PreparedStatement statement = ConexionBD.getConnection().prepareStatement(sql);
+			statement.setInt(1, payment.getCustomerNumber());
+			statement.setString(2, payment.getCheckNumber());
+			statement.setString(3, payment.getDate());
+			statement.setDouble(4, payment.getAmount());
+
+			resultado = statement.executeUpdate();
+
+			ConexionBD.close();
+
+		} catch (SQLException ex) {
+			System.out.println(ex.getMessage());
+		}
+
+		return (resultado == 0 ? false : true);
+
 	}
 
 }

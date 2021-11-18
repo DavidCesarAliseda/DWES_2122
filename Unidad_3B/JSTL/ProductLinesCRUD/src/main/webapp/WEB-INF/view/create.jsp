@@ -15,7 +15,7 @@
 			<div class="col-8">
 				<form method="post">
 					<label for="productline" class="form-label">Product Line</label>
-    				<input type="text" class="form-control" id="productLine" name="productLine" value="${requestScope.categoria}" required >
+    				<input type="text" class="form-control" id="productLine" name="productLine" value="${categoria}" required >
     					<c:if test="${error != null }">
     						<p><small class="text-danger">Categoría ya existente</small></p>
     					</c:if>    					

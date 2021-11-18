@@ -60,7 +60,7 @@ public class CreateProductLineServlet extends HttpServlet {
 				request.setAttribute("categoria", categoria);
 				request.setAttribute("texto", texto);
 				request.setAttribute("html", html);
-				doGet(request,response);
+				doGet(request,response);				
 			}
 			
 		}

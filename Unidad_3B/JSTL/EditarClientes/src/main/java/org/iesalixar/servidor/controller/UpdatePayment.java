@@ -63,7 +63,7 @@ public class UpdatePayment extends HttpServlet {
 			daoImpl.updatePayment(payment);
 		}
 		
-		response.sendRedirect(request.getContextPath()+"/Admin/");
+		response.sendRedirect(request.getContextPath());
 	}
 
 }

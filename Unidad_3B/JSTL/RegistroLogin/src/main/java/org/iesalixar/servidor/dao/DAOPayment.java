@@ -11,4 +11,5 @@ public interface DAOPayment {
 	public boolean removePayment(int customerNumber,String checkNumber);
 	public boolean updatePayment(Payment payment);
 	public boolean insertPayment(Payment payment);
+
 }

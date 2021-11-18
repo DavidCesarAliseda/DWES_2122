@@ -47,15 +47,25 @@ public class AddPaymentServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String checkNumber = request.getParameter("checkn");
-		int customerNumber = Integer.parseInt(request.getParameter("cn"));
-		String date = request.getParameter("date");
-		Double amount = Double.parseDouble(request.getParameter("amount"));
 		
-		if (checkNumber != null && customerNumber != 0 && date != null && amount != 0.0) {
-
+		
+		//Obtengo los parámetros
+		String customerNumber = request.getParameter("customerNumber");
+		String checkNumber = request.getParameter("checkNumber");
+		String date = request.getParameter("paymentDate");
+		String amount = request.getParameter("amount");
+		
+		if (customerNumber!=null && checkNumber!=null && date!=null && amount!=null) {
+			
+			Payment payment = new Payment(Integer.parseInt(customerNumber),checkNumber,date,Double.parseDouble(amount));
+			
 			DAOPaymentImpl dao = new DAOPaymentImpl();
+			
+			dao.insertPayment(payment);
+			
 		}
+		
+		response.sendRedirect(request.getContextPath()+"/Admin/");
 	}
 
 }
