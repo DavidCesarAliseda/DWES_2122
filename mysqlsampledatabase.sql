@@ -30,12 +30,12 @@ USE `classicmodels`;
 /*Table structure for table `customers` */
 
 DROP TABLE IF EXISTS `customers`;
-
-create table usuarios (
-	'usuario' varchar(250) primary key, 
-	'email' varchar(250) unique,
-	'password' varchar(250),
-	'role' varchar(10));
+/*
+create table `usuarios` (
+	`usuario` varchar(250) primary key, 
+	`email` varchar(250) unique,
+	`password` varchar(250),
+	`role` varchar(10));*/
 
 create table `usuarios` (
 `usuario` varchar(250) primary key, 
