@@ -1,12 +1,13 @@
 package org.iesalixar.servidor.dao;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import org.iesalixar.servidor.bd.ConexionBD;
+import org.iesalixar.servidor.bd.PoolDB;
 import org.iesalixar.servidor.models.Product;
 
 public class DAOProductImpl implements DAOProduct {
@@ -15,11 +16,13 @@ public class DAOProductImpl implements DAOProduct {
 	public Product getProduct(String productName) {
 
 		Product product = null;
+		PoolDB pool = new PoolDB();
+		Connection con = pool.getConnection();
 
 		try {
 
 			String sql = "select * from products where  productName=?";
-			PreparedStatement statement = ConexionBD.getConnection().prepareStatement(sql);
+			PreparedStatement statement = con.prepareStatement(sql);
 			statement.setString(1, productName);
 
 			ResultSet rs = statement.executeQuery();
@@ -40,11 +43,9 @@ public class DAOProductImpl implements DAOProduct {
 				product.setMsrp(rs.getDouble("MSRP"));
 
 			}
-
+			con.close();
 		} catch (SQLException ex) {
 			System.out.println(ex.getMessage());
-		} finally {
-			ConexionBD.close();
 		}
 
 		return product;
@@ -57,13 +58,16 @@ public class DAOProductImpl implements DAOProduct {
 
 	@Override
 	public boolean updateProduct(Product product) {
-int resultado=0;
-		
+		int resultado = 0;
+		PoolDB pool = new PoolDB();
+		Connection con = pool.getConnection();
+
 		try {
 
 			String sql = "update payments set productName= ?, productCode=?, productLine= ?, quantityInStock=?, buyPrice= ?  where productCode = ?";
-			PreparedStatement statement = ConexionBD.getConnection().prepareStatement(sql);
-			statement.setString(1,product.getProductName());
+			PreparedStatement statement = con.prepareStatement(sql);
+			
+			statement.setString(1, product.getProductName());
 			statement.setString(2, product.getProductCode());
 			statement.setString(3, product.getProductLine());
 			statement.setInt(4, product.getQuantityInStock());
@@ -72,16 +76,15 @@ int resultado=0;
 
 			resultado = statement.executeUpdate();
 
-			ConexionBD.close();
+			con.close();
 
 		} catch (SQLException ex) {
 			System.out.println(ex.getMessage());
 		}
 
-		return (resultado==0?false:true);
-	
+		return (resultado == 0 ? false : true);
+
 	}
-	
 
 	@Override
 	public boolean insertProduct(Product product) {
@@ -93,11 +96,14 @@ int resultado=0;
 	public ArrayList<Product> getAllProducts() {
 		ArrayList<Product> productList = new ArrayList<>();
 		Product product;
+		
+		PoolDB pool = new PoolDB();
+		Connection con = pool.getConnection();
 
 		try {
 
 			String sql = "select * from products";
-			PreparedStatement statement = ConexionBD.getConnection().prepareStatement(sql);
+			PreparedStatement statement =con.prepareStatement(sql);
 			ResultSet rs = statement.executeQuery();
 
 			while (rs.next()) {
@@ -108,11 +114,11 @@ int resultado=0;
 				product.setProductLine(rs.getString("productLine"));
 				product.setQuantityInStock(rs.getInt("quantityInStock"));
 				product.setBuyPrice(rs.getDouble("buyPrice"));
-				
+
 				productList.add(product);
 			}
 
-			ConexionBD.close();
+			con.close();
 		} catch (SQLException ex) {
 			System.out.println(ex.getMessage());
 		}

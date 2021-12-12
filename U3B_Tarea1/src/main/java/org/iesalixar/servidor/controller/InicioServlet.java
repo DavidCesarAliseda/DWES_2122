@@ -73,7 +73,7 @@ public class InicioServlet extends HttpServlet {
 					} else {
 						response.sendRedirect("");
 					}
-					logger.info("El usuario a entrado en sesion");
+					/*logger.info("El usuario a entrado en sesion");*/
 
 				} else {
 

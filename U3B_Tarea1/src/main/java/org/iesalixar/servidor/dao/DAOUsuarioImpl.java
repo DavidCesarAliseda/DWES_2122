@@ -1,28 +1,29 @@
 package org.iesalixar.servidor.dao;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 
+import org.iesalixar.servidor.bd.PoolDB;
 import org.iesalixar.servidor.models.Usuario;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import org.iesalixar.servidor.bd.ConexionBD;
 
-public class DAOUsuarioImpl implements DAOUsuario{
-
+public class DAOUsuarioImpl implements DAOUsuario {
 
 	@Override
 	public Usuario getUsuario(String nombre) {
-		
+
 		Usuario usuario = null;
+		PoolDB pool = new PoolDB();
+		Connection con = pool.getConnection();
 
 		try {
 
 			String sql = "select * from usuarios where usuario=?";
-			PreparedStatement statement = ConexionBD.getConnection().prepareStatement(sql);
+			PreparedStatement statement = con.prepareStatement(sql);
 			statement.setString(1, nombre);
-			
 
 			ResultSet rs = statement.executeQuery();
 
@@ -40,7 +41,7 @@ public class DAOUsuarioImpl implements DAOUsuario{
 
 			}
 
-			ConexionBD.close();
+			con.close();
 
 		} catch (SQLException ex) {
 			System.out.println(ex.getMessage());
@@ -49,15 +50,16 @@ public class DAOUsuarioImpl implements DAOUsuario{
 		return usuario;
 
 	}
-	
+
 	@Override
 	public boolean registerUsuario(Usuario usuario) {
 		int resultado = 0;
-
+		PoolDB pool = new PoolDB();
+		Connection con = pool.getConnection();
 		try {
 
 			String sql = "insert into usuarios values(?,?,?,?,?,?)";
-			PreparedStatement statement = ConexionBD.getConnection().prepareStatement(sql);
+			PreparedStatement statement = con.prepareStatement(sql);
 			statement.setString(1, usuario.getUsuario());
 			statement.setString(2, usuario.getEmail());
 			statement.setString(3, usuario.getPassword());
@@ -67,7 +69,7 @@ public class DAOUsuarioImpl implements DAOUsuario{
 
 			resultado = statement.executeUpdate();
 
-			ConexionBD.close();
+			con.close();
 
 		} catch (SQLException ex) {
 			System.out.println(ex.getMessage());
@@ -91,11 +93,12 @@ public class DAOUsuarioImpl implements DAOUsuario{
 	@Override
 	public boolean insertUser(Usuario user) {
 		int resultado = 0;
-
+		PoolDB pool = new PoolDB();
+		Connection con = pool.getConnection();
 		try {
 
 			String sql = "insert into usuarios values(?,?,?,?,?,?)";
-			PreparedStatement statement = ConexionBD.getConnection().prepareStatement(sql);
+			PreparedStatement statement = con.prepareStatement(sql);
 			statement.setString(1, user.getUsuario());
 			statement.setString(2, user.getEmail());
 			statement.setString(3, user.getPassword());
@@ -105,7 +108,7 @@ public class DAOUsuarioImpl implements DAOUsuario{
 
 			resultado = statement.executeUpdate();
 
-			ConexionBD.close();
+			con.close();
 
 		} catch (SQLException ex) {
 			System.out.println(ex.getMessage());

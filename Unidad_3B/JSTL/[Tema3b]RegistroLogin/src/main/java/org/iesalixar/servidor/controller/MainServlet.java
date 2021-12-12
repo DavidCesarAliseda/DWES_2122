@@ -17,70 +17,70 @@ import org.iesalixar.servidor.utils.PasswordHashGenerator;
  */
 public class MainServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public MainServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	public MainServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		request.getRequestDispatcher("/WEB-INF/view/index.jsp").forward(request, response);
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
-		//Comprobamos si tenemos los datos de la petición del formulario
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		// Comprobamos si tenemos los datos de la petición del formulario
 		String usuario = request.getParameter("usuario");
 		String password = request.getParameter("password");
-		
-		if (usuario!=null && password!=null) {
-			
+
+		if (usuario != null && password != null) {
+
 			DAOUsuarioImpl dao = new DAOUsuarioImpl();
-			
+
 			Usuario user = dao.getUsuario(usuario);
-			
-			if (user!=null) {
+
+			if (user != null) {
 				if (PasswordHashGenerator.checkPassword(password, user.getPassword())) {
-					
+
 					HttpSession sesion = request.getSession();
-					
+
 					sesion.setAttribute("usuario", user.getUsuario());
 					sesion.setAttribute("email", user.getEmail());
 					sesion.setAttribute("role", user.getRole());
-					
+
 					if ("admin".equals(user.getRole())) {
 						response.sendRedirect("Admin/");
 					} else {
 						response.sendRedirect("Search");
 					}
-					
-					
+
 				} else {
-				
+
 					request.setAttribute("error", "login inválido");
-					doGet(request,response);
+					doGet(request, response);
 					return;
 				}
 			} else {
-				   
+
 				request.setAttribute("error", "Usuario no existente");
-				doGet(request,response);
+				doGet(request, response);
 				return;
 			}
-			
-			
-			
+
 		}
 	}
 
