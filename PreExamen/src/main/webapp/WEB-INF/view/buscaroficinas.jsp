@@ -12,37 +12,38 @@
 <body>
 	<div class="container">
 		<jsp:include page="include/barra.jsp" />
-		
+
 		<div class="row justify-content-center">
 			<div class="col-6 mt-5">
 				<form method="post">
-					<label for="office" class="form-label">Oficina</label> 
-					<select class="form-select" id="office" name="office">
-						<c:forEach  items="${oficinas}" var="o">
+					<label for="office" class="form-label">Oficina</label> <select
+						class="form-select" id="office" name="office">
+						<c:forEach items="${oficinas}" var="o">
 							<option value="${o.city}">${o.city}</option>
-						</c:forEach>					
-					</select>
-					<input type="submit" value="Obtener Datos" class="btn btn-primary w-100 mt-5">
+						</c:forEach>
+					</select> <input type="submit" value="Obtener Datos"
+						class="btn btn-primary w-100 mt-5">
 				</form>
 			</div>
 		</div>
-		
-		<div class="row justify-content-center">
-			<div class="col-8">
-			<p></p>
-			<p>Datos de la oficina de ${ofi.city}</p>
-			<p>Code: ${ofi.officeCode}</p>
-			<p>Ciudad: ${ofi.city}</p>
-			<p>Teléfono: ${ofi.phone}</p>
-			<p>${ofi.addressLine1}</p>
-			<p>${ofi.addressLine2}</p>
-			<p>${ofi.state}</p>
-			<p>${ofi.country}</p>
-			<p>${ofi.postalCode}</p>
-			<p>${ofi.territory}</p>
+		<c:if test="${ofi!=null}">
+			<div class="row justify-content-center">
+				<div class="col-8">
+					<p></p>
+					<h3>Datos de la oficina de ${ofi.city}</h3>
+					<p>Code: ${ofi.officeCode}</p>
+					<p>Ciudad: ${ofi.city}</p>
+					<p>Teléfono: ${ofi.phone}</p>
+					<p>${ofi.addressLine1}</p>
+					<p>${ofi.addressLine2}</p>
+					<p>${ofi.state}</p>
+					<p>${ofi.country}</p>
+					<p>${ofi.postalCode}</p>
+					<p>${ofi.territory}</p>
+				</div>
 			</div>
-		</div>
-		
+		</c:if>
+
 	</div>
 </body>
 </html>
