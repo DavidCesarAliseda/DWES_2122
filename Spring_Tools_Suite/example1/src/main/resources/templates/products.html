@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="fragments/bootstrap::head(title='Products')"></head>
+<body>
+	<div class="container mt-5">
+		<div class="row mt-5">
+			<header th:insert="fragments/menu::menu"></header>
+			<ul>
+				<li th:text="${name}"></li>
+				<li th:text="${brand}"></li>
+				<li th:text="${category}"></li>
+			</ul>
+			<footer th:replace="fragments/menu::footer(info='Productos')"></footer>
+		</div>
+	</div>
+</body>
+</html>
