@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="/fragments/bootstrap::head(title='Matricula')"></head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div class="container mt-5">
+		<div class="row justify-content-center mt-5">
+			<div class="col-6">
+				<h1>Concierto</h1>
+				<div th:if="${concierto.tipo == null}">
+					<form action="#" th:action="@{/forms/concierto}" th:object="${concierto}" method="post">
+						<label>Grupos:</label>
+						<select id="grupos" class="form-select" th:field="*{grupos}" multiple>
+  						 	<option th:each=" entry,stats : ${grupos}" th:value="${entry}" th:text="${entry}">
+  						 </select>  	
+						
+						
+						
+					</form>
+				</div>	
+				<div th:unless="${concierto.tipo == null}">
+					<h1>no</h1>
+				</div>	
+			</div>
+		</div>
+	</div>
+</body>
+</html>

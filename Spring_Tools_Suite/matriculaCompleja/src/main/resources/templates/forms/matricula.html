@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="/fragments/bootstrap::head(title='Matricula')"></head>
+
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div class="container mt-5">
+		<div class="row justify-content-center mt-5">
+			<div class="col-6">
+				<h1>Matricula</h1>
+				<div th:if="${alumno.nombre == null}">
+					<form action="#" th:action="@{/forms/matricula}" th:object="${alumno}" method="post">
+						 <label for="nombre">Nombre</label>
+	    				 <input type="text" class="form-control" id="nombre" placeholder="nombre" th:field="*{nombre}" required>			
+	    				 <label class="mt-3" for="firstName">Apellidos</label>
+	    				 <input type="text" class="form-control" id="apellidos" placeholder="apellidos" th:field="*{apellidos}" required>
+	    				 <label class="mt-3" for="lastName">DNI</label>
+	    				 <input type="text" class="form-control" id="DNI" placeholder="DNI" th:field="*{DNI}" required>
+	    				 
+	    				  <p th:><input class="form-check-input" type="checkbox" value="music" id="music" th:field="*{hobbies}">
+	    				 
+					</form>
+				</div>	
+				<div th:unless="${user.userName == null}">
+					
+				</div>	
+			</div>
+		</div>
+	</div>
+</body>
+</html>
