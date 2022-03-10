@@ -18,6 +18,8 @@
 --
 -- Table structure for table `alumno`
 --
+DROP SCHEMA IF EXISTS `universidad`;
+CREATE SCHEMA `universidad`;
 USE universidad;
 DROP TABLE IF EXISTS `alumno`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;

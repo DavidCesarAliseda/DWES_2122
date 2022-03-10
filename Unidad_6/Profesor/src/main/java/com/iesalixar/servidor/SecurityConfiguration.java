@@ -1,4 +1,4 @@
-package com.iesalixar.servidor.controller;
+package com.iesalixar.servidor;
 
 
 
