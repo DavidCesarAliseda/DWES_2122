@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="fragments/bootstrap::head(title='Grados')"></head>
+<body>
+	<div class="container mt-5">
+		<div class="row mt-5 justify-content-center">
+			<header th:insert="fragments/parts::menu"></header>
+			<h1 class="text-center mt-3" th:text="${grado.getNombre()}"></h1>
+	
+				<table th:if="${error} == null" class="table table-stripped table-hover">
+					<thead class="table-light">
+						<tr>
+							<th>ID</th>
+							<th>Nombre</th>
+							<th>Creditos</th>
+							<th>Tipo</th>
+							<th>Curso</th>
+							<th>Cuatrimestre</th>
+							<th>Profesor</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="a : ${grado.getAsignatura()}">
+							<td th:text="${a.getId()}">
+							<td th:text="${a.getNombre()}">
+							<td th:text="${a.getCreditos()}">
+							<td th:text="${a.getTipo()}">
+							<td th:text="${a.getCurso()}">
+							<td th:text="${a.getCuatrimestre()}">
+							<td th:unless="${a.getProfesor() == null}" th:text="${a.getProfesor().nombre}">
+						</tr>
+					</tbody>
+				</table>
+				<div th:if="${error!=null}" class="text-danger" >
+					No hay asignaturas en este grado</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

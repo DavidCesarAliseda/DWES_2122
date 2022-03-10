@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="fragments/bootstrap::head(title='Profesores')"></head>
+<body>
+	<div class="container mt-5">
+		<div class="row mt-5 justify-content-center">
+			<header th:insert="fragments/parts::menu"></header>
+			<h1 class="text-center mt-3" >Profesores</h1>
+			<div sec:authorize="hasRole('ROLE_ADMIN')"><a class="text-center mt-1 col-2 btn btn-primary" th:href="@{/profesor/addProfesor}">Añadir Profesor</a></div>
+			<div class="col-8">
+				<table class="table table-stripped table-hover">
+					<thead class="table-light">
+					<tr>
+						<th>ID</th>
+						<th>Nombre</th>
+						<th>Apellidos</th>
+						<th>Ciudad</th>
+						<th>Direccion</th>
+						<th>Telefono</th>
+						<th>Fecha de nacimiento</th>
+						<th>Sexo</th>
+						<th>Departamento</th>
+					</tr>
+					</thead>					
+					<tbody>
+					 <tr th:each="p : ${profesores}">
+					 	<td th:text="${p.getId()}"></td>
+					 	<td th:text="${p.getNombre()}"></td>
+					 	<td th:text="${p.getApellido1() + ' ' +p.getApellido2()}"></td>
+					 	<td th:text="${p.getCiudad()}"></td>
+					 	<td th:text="${p.getDireccion()}"></td>
+					 	<td th:text="${p.getTelefono()}"></td>
+					 	<td th:text="${p.getFechaNacimiento()}"></td>
+					 	<td th:text="${p.getSexo()}"></td>
+					 	<td th:unless="${p.getDepartamento() == null}" th:text="${p.getDepartamento().nombre}">
+					 	<td><a th:href="@{'/profesor/asignaturas?codigo='+${p.getId()}}"><i class="bi bi-eye-fill"></i></a></td>
+					 </tr>					
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

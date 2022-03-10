@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="fragments/bootstrap::head(title='Profesor')"></head>
+<body>
+	<div class="container mt-5">
+		<div class="row mt-5 justify-content-center">
+			<header th:insert="fragments/parts::menu"></header>
+			<h1 class="text-center mt-3" th:text="${profesor.getNombre() +' '+profesor.getApellido1()+' '+profesor.getApellido2}"></h1>
+	
+				<table th:if="${error} == null" class="table table-stripped table-hover">
+					<thead class="table-light">
+						<tr>
+							<th>ID</th>
+							<th>Nombre</th>
+							<th>Creditos</th>
+							<th>Tipo</th>
+							<th>Curso</th>
+							<th>Cuatrimestre</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="p : ${profesor.getAsignaturas()}">
+							<td th:text="${p.getId()}">
+							<td th:text="${p.getNombre()}">
+							<td th:text="${p.getCreditos()}">
+							<td th:text="${p.getTipo()}">
+							<td th:text="${p.getCurso()}">
+							<td th:text="${p.getCuatrimestre()}">
+						</tr>
+					</tbody>
+				</table>
+				<div th:if="${error!=null}" class="text-danger" >
+					Este profesor no tiene asignaturas asignadas</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
